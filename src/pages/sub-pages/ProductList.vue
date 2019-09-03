@@ -34,6 +34,18 @@
             <span class="dialog_item_span">商品标题:</span>
             <input>
           </div>
+          <div class="dialog_item">
+            <span class="dialog_item_span">商品主图:</span>
+            <input>
+          </div>
+          <div class="dialog_item">
+            <span class="dialog_item_span">商品小图列表:</span>
+            <input>
+          </div>
+          <div class="dialog_item">
+            <span class="dialog_item_span">商品原价:</span>
+            <input>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="配置管理" name="second">商品详情</el-tab-pane>
       </el-tabs>
