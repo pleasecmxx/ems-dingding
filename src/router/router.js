@@ -3,15 +3,27 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import {
+    RootView,
+    ProductList
+} from './../pages'
 
-const Home = () => import('./../pages/Home')
+
 
 
 const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: Home
+            component: RootView,
+            redirect: '/ProductList',
+            children: [
+                {
+                    path: '/ProductList',
+                    name: '快捷菜单',
+                    component: ProductList,
+                }
+            ]
         }
     ]
 })
