@@ -28,14 +28,11 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-            <el-select class="dialog_item_select" v-model="value" placeholder="请选择">
-              <el-option
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-              ></el-option>
-            </el-select>
+          </div>
+
+          <div class="dialog_item">
+            <span class="dialog_item_span">商品标题:</span>
+            <input>
           </div>
         </el-tab-pane>
         <el-tab-pane label="配置管理" name="second">商品详情</el-tab-pane>
