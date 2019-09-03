@@ -41,9 +41,8 @@
               action="https://jsonplaceholder.typicode.com/posts/"
               :on-preview="handlePreview"
               :on-remove="handleRemove"
-              :file-list="fileList"
               list-type="picture"
-              limit="1"
+              :limit="1"
             >
               <el-button class="upload-demo-button" size="small" type="primary">点击上传</el-button>
             </el-upload>
@@ -55,16 +54,15 @@
               action="https://jsonplaceholder.typicode.com/posts/"
               :on-preview="handlePreview"
               :on-remove="handleRemove"
-              :file-list="fileList"
               list-type="picture"
-              limit="3"
+              :limit="3"
             >
               <el-button class="upload-demo-button" size="small" type="primary">点击上传</el-button>
             </el-upload>
           </div>
           <div class="dialog_item">
             <span class="dialog_item_span">商品原价:</span>
-            <el-input-number v-model="num" min="0.01" @change="handleChange" label="描述文字"></el-input-number>
+            <el-input-number v-model="num" :min="0.01" @change="handleChange" label="描述文字"></el-input-number>
           </div>
           <div class="dialog_item">
             <span class="dialog_item_span">状态:</span>
@@ -75,7 +73,7 @@
           </div>
           <div class="dialog_item">
             <span class="dialog_item_span">优惠券:</span>
-            <el-input-number v-model="num" min="0.01" step="1" @change="handleChange" label="描述文字"></el-input-number>
+            <el-input-number v-model="num" :min="0.01" :step="1" @change="handleChange" label="描述文字"></el-input-number>
           </div>
         </el-tab-pane>
         <el-tab-pane label="商品详情" name="second">
@@ -86,7 +84,6 @@
               action="https://jsonplaceholder.typicode.com/posts/"
               :on-preview="handlePreview"
               :on-remove="handleRemove"
-              :file-list="fileList"
               list-type="picture"
             >
               <el-button class="upload-demo-button" size="small" type="primary">点击上传</el-button>
@@ -138,6 +135,21 @@ export default {
       ],
       value: ""
     };
+  },
+
+  methods: {
+    handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+      handleChange(value) {
+        console.log(value);
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
   }
 };
 </script>
