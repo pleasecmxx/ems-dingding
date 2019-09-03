@@ -4,7 +4,10 @@
 
 <script>
 export default {
-    name:'Home'
+    name:'Home',
+    created() {
+      // console.log(this.axios)
+    }
 }
 </script>
 

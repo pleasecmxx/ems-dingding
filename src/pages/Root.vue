@@ -61,7 +61,28 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'Root',
+  created() {
+    // this.axios.get('http://jsonplaceholder.typicode.com/comments')
+    // .then(res => {
+    //   console.log(res)
+    // })
+    // .catch(err => {
+    //   console.log(err)
+    // })
+    let params = {
+      mobile: '15774186212',
+      password: 'test',
+    }
+    params = JSON.stringify(params);
+    console.log(params)
+    this.axios.post('/Apilogin/login', params)
+    .then(res => {
+      console.log(res)
+    })
+  }
+};
 </script>
 
 <style scoped>
