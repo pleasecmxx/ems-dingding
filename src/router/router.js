@@ -4,8 +4,10 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import {
+    Login,
     RootView,
-    ProductList
+    ProductList,
+    Categories
 } from './../pages'
 
 
@@ -22,8 +24,17 @@ const router = new VueRouter({
                     path: '/ProductList',
                     name: '快捷菜单',
                     component: ProductList,
+                },
+                {
+                    path: '/Categories',
+                    name: '商品分类管理',
+                    component: Categories,
                 }
             ]
+        }, {
+            path: '/login',
+            name: '登录',
+            component: Login,
         }
     ]
 })

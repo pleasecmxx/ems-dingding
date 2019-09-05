@@ -4,7 +4,7 @@
       <p class="header_p">丁丁汽车管理平台</p>
       <div class="header_right">
         <div class="header_right_setting">
-          <i class="el-icon-setting"></i>
+          <i class="el-icon-setting" title="设置"></i>
         </div>
       </div>
     </div>
@@ -34,10 +34,15 @@
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-menu-item index="2">
-              <i class="el-icon-s-fold"></i>
-              <span slot="title">分类管理</span>
-            </el-menu-item>
+            <el-submenu index="2">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span>分类管理</span>
+              </template>
+              <el-menu-item index="2-1">
+                <router-link tag="div" to="/Categories">商品分类管理</router-link>
+              </el-menu-item>
+            </el-submenu>
           </el-menu>
         </el-col>
       </el-row>
@@ -68,7 +73,7 @@ export default {
     params = JSON.stringify(params);
     console.log(params);
     this.axios.post("/Apilogin/login", params).then(res => {
-      console.log(res);
+      // console.log(res);
     });
   },
 
@@ -120,6 +125,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .header_right_setting:hover > i {

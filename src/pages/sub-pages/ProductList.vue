@@ -11,30 +11,31 @@
       :data="tableData"
       tooltip-effect="dark"
       style="width: 100%"
+      max-height="50%"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column label="id" width="80">
         <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
-      <el-table-column prop="title" label="商品标题"></el-table-column>
-      <el-table-column prop="sort" label="所属分类" width="120"></el-table-column>
+      <el-table-column prop="title" label="商品标题" width=""></el-table-column>
+      <el-table-column prop="sort" label="所属分类" width="150"></el-table-column>
       <el-table-column prop="img" label="商品主图" width="160">
         <template slot-scope="scope">
-          <img style="height: 60px; width: auto" :src="scope.row.img"/>
+          <img style="height: 60px; width: auto" :src="scope.row.img" />
         </template>
       </el-table-column>
-      <el-table-column prop="price" label="商品原价" width="120">
+      <el-table-column prop="price" label="商品原价" width="150">
         <template slot-scope="scope">
           <p style="color: #F56C6C">{{ scope.row.price.toFixed(2) }}</p>
         </template>
       </el-table-column>
-      <el-table-column prop="discount" label="优惠价格" width="120">
+      <el-table-column prop="discount" label="优惠价格" width="150">
         <template slot-scope="scope">
           <p>{{ scope.row.discount.toFixed(2) }}</p>
         </template>
       </el-table-column>
-      <el-table-column prop="volume" label="销量" width="120"></el-table-column>
+      <el-table-column prop="volume" label="销量" width="150"></el-table-column>
       <el-table-column prop="state" label="状态" width="120">
         <template slot-scope="scope">
           <span v-if="scope.row.state" style="color: #666">在售</span>
@@ -49,7 +50,7 @@
       </el-table-column>
     </el-table>
     <!-- dialog satrt -->
-    <el-dialog title="添加商品" :visible.sync="centerDialogVisible" width="50%" lock-scroll="true" center>
+    <el-dialog title="添加商品" :visible.sync="centerDialogVisible" width="800px" center>
       <el-tabs class="dialog_tabs" v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="基本信息" name="first">
           <div class="dialog_item">
@@ -144,6 +145,15 @@
       </span>
     </el-dialog>
     <!-- dialog end -->
+
+    <div class="bottom">
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-count="page"
+        @current-change="handleCurrentChange"
+      ></el-pagination>
+    </div>
   </div>
 </template>
 
@@ -158,6 +168,7 @@ export default {
       input: "",
       num: 1,
       radio: "1",
+      page: "",
       options: [
         {
           value: "选项1",
@@ -181,69 +192,214 @@ export default {
         }
       ],
       value: "",
-      tableData: [
+      tableData: [],
+      test: [
         {
-          id: 1,
-          title: "北京烤鸭",
-          sort: "食品",
-          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
-          price: 12.00,
-          volume: 0,
-          discount: 0.99,
-          state: true
+          page: 1,
+          commodity: [
+            {
+              id: 1,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: true
+            },
+            {
+              id: 2,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            }
+          ]
         },
         {
-          id: 2,
-          title: "北京烤鸭",
-          sort: "食品",
-          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
-          price: 12.00,
-          volume: 0,
-          discount: 0.99,
-          state: false
-        },
-        {
-          id: 3,
-          title: "北京烤鸭",
-          sort: "食品",
-          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
-          price: 12.00,
-          volume: 0,
-          discount: 0.99,
-          state: false
-        },
-        {
-          id: 3,
-          title: "北京烤鸭",
-          sort: "食品",
-          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
-          price: 12.00,
-          volume: 0,
-          discount: 0.99,
-          state: false
+          page: 2,
+          commodity: [
+            {
+              id: 1,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: true
+            },
+            {
+              id: 2,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            },
+            {
+              id: 3,
+              title: "北京烤鸭",
+              sort: "食品",
+              img:
+                "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg",
+              price: 12.0,
+              volume: 0,
+              discount: 0.99,
+              state: false
+            }
+          ]
         }
       ]
     };
   },
 
+  created() {
+    // let params = {};
+    // params = JSON.stringify(params);
+    // console.log(params);
+    // this.axios.post("/Apigoods/goodsClass", params).then(res => {
+    //   console.log(res);
+    // });
+    this.page = this.test.length;
+    console.log(this.page);
+    this.tableData = this.test[0].commodity;
+  },
+
   methods: {
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      // console.log(file, fileList);
     },
     handlePreview(file) {
-      console.log(file);
+      // console.log(file);
     },
     handleChange(value) {
-      console.log(value);
+      // console.log(value);
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
+    },
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
+
+    handleCurrentChange(val) {
+      console.log(val);
+      this.tableData = this.test[val-1].commodity;
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .operating {
   display: flex;
   padding-bottom: 12px;
@@ -277,52 +433,8 @@ export default {
   font-size: 12px;
 }
 
-.dialog_tabs {
-  height: 500px;
-  overflow-y: auto;
-}
-
-.el-dialog__header {
-  display: flex;
-  align-items: center;
-}
-
-.el-dialog__title {
-  font-size: 14px;
-}
-
-.dialog_item {
-  /* height: 50px; */
-  display: flex;
-  align-items: flex-start;
+.bottom {
   margin-top: 20px;
-}
-
-.dialog_item_right {
-  height: 40px;
-  display: flex;
-  align-items: center;
-}
-
-.dialog_item_span {
-  width: 100px;
-  height: 40px;
-  margin-right: 30px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.dialog_item_select {
-  margin-right: 10px;
-}
-
-.dialog_item_input {
-  width: 444px;
-}
-
-.upload-demo-button {
-  height: 40px;
 }
 
 /* .el-table__body-wrapper.is-scrolling-none {
