@@ -1,18 +1,60 @@
 <template>
   <div class="content">
     <div class="operating">
-      <div class="operating_add" @click="centerDialogVisible = true">
+      <el-button type="primary" @click="centerDialogVisible = true">
         <i class="el-icon-plus img-add"></i>
         <span class="operating_add_span">添加</span>
-      </div>
+      </el-button>
     </div>
-
-    <el-dialog title="添加" :visible.sync="centerDialogVisible" width="50%" center>
+    <el-table
+      ref="multipleTable"
+      :data="tableData"
+      tooltip-effect="dark"
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" width="55"></el-table-column>
+      <el-table-column label="id" width="80">
+        <template slot-scope="scope">{{ scope.row.id }}</template>
+      </el-table-column>
+      <el-table-column prop="title" label="商品标题"></el-table-column>
+      <el-table-column prop="sort" label="所属分类" width="120"></el-table-column>
+      <el-table-column prop="img" label="商品主图" width="160">
+        <template slot-scope="scope">
+          <img style="height: 60px; width: auto" :src="scope.row.img"/>
+        </template>
+      </el-table-column>
+      <el-table-column prop="price" label="商品原价" width="120">
+        <template slot-scope="scope">
+          <p style="color: #F56C6C">{{ scope.row.price.toFixed(2) }}</p>
+        </template>
+      </el-table-column>
+      <el-table-column prop="discount" label="优惠价格" width="120">
+        <template slot-scope="scope">
+          <p>{{ scope.row.discount.toFixed(2) }}</p>
+        </template>
+      </el-table-column>
+      <el-table-column prop="volume" label="销量" width="120"></el-table-column>
+      <el-table-column prop="state" label="状态" width="120">
+        <template slot-scope="scope">
+          <span v-if="scope.row.state" style="color: #666">在售</span>
+          <span v-else style="color: #999">已下架</span>
+        </template>
+      </el-table-column>
+      <el-table-column prop="option" label="操作" width="120" fixed="right">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button type="text" size="small">编辑</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- dialog satrt -->
+    <el-dialog title="添加商品" :visible.sync="centerDialogVisible" width="50%" lock-scroll="true" center>
       <el-tabs class="dialog_tabs" v-model="activeName" type="card" @tab-click="handleClick">
         <el-tab-pane label="基本信息" name="first">
           <div class="dialog_item">
             <span class="dialog_item_span">商品分类:</span>
-            <el-select class="dialog_item_select" v-model="value" placeholder="请选择">
+            <el-select class="dialog_item_select" v-model="value" placeholder="请选择商品大类">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -20,7 +62,7 @@
                 :value="item.value"
               ></el-option>
             </el-select>
-            <el-select class="dialog_item_select" v-model="value" placeholder="请选择">
+            <el-select class="dialog_item_select" v-model="value" placeholder="请选择商品小类">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -29,10 +71,9 @@
               ></el-option>
             </el-select>
           </div>
-
           <div class="dialog_item">
             <span class="dialog_item_span">商品标题:</span>
-            <el-input class="dialog_item_input" v-model="input" placeholder="请输入内容"></el-input>
+            <el-input class="dialog_item_input" v-model="input" placeholder="请输入商品标题"></el-input>
           </div>
           <div class="dialog_item">
             <span class="dialog_item_span">商品主图:</span>
@@ -73,7 +114,13 @@
           </div>
           <div class="dialog_item">
             <span class="dialog_item_span">优惠券:</span>
-            <el-input-number v-model="num" :min="0.01" :step="1" @change="handleChange" label="描述文字"></el-input-number>
+            <el-input-number
+              v-model="num"
+              :min="0.01"
+              :step="1"
+              @change="handleChange"
+              label="描述文字"
+            ></el-input-number>
           </div>
         </el-tab-pane>
         <el-tab-pane label="商品详情" name="second">
@@ -89,7 +136,6 @@
               <el-button class="upload-demo-button" size="small" type="primary">点击上传</el-button>
             </el-upload>
           </div>
-          
         </el-tab-pane>
       </el-tabs>
       <span slot="footer" class="dialog-footer">
@@ -97,6 +143,7 @@
         <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- dialog end -->
   </div>
 </template>
 
@@ -133,23 +180,65 @@ export default {
           label: "北京烤鸭"
         }
       ],
-      value: ""
+      value: "",
+      tableData: [
+        {
+          id: 1,
+          title: "北京烤鸭",
+          sort: "食品",
+          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
+          price: 12.00,
+          volume: 0,
+          discount: 0.99,
+          state: true
+        },
+        {
+          id: 2,
+          title: "北京烤鸭",
+          sort: "食品",
+          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
+          price: 12.00,
+          volume: 0,
+          discount: 0.99,
+          state: false
+        },
+        {
+          id: 3,
+          title: "北京烤鸭",
+          sort: "食品",
+          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
+          price: 12.00,
+          volume: 0,
+          discount: 0.99,
+          state: false
+        },
+        {
+          id: 3,
+          title: "北京烤鸭",
+          sort: "食品",
+          img: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2672209328,2990950354&fm=26&gp=0.jpg',
+          price: 12.00,
+          volume: 0,
+          discount: 0.99,
+          state: false
+        }
+      ]
     };
   },
 
   methods: {
     handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleChange(value) {
-        console.log(value);
-      },
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    handleChange(value) {
+      console.log(value);
+    },
+    handleClick(tab, event) {
+      console.log(tab, event);
+    }
   }
 };
 </script>
@@ -157,7 +246,7 @@ export default {
 <style>
 .operating {
   display: flex;
-  padding: 20px;
+  padding-bottom: 12px;
 }
 
 .operating_add {
@@ -236,4 +325,13 @@ export default {
   height: 40px;
 }
 
+/* .el-table__body-wrapper.is-scrolling-none {
+  padding: 0 12px;
+} */
+
+/* .el-table {
+  padding: 0 12px;
+  box-sizing: border-box;
+  margin-right: 12px;
+} */
 </style>

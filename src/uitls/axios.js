@@ -6,6 +6,7 @@
 
 import Axios from 'axios'
 // import Vue from 'vue'
+import { Message } from 'element-ui'
 
 let axios = Axios.create({      //axios基础配置
     baseURL: 'https://ww.dingdingds.com',    //基础路径
@@ -27,7 +28,7 @@ const tip = msg => {
     //     message: msg,
     //     duration: '1000'
     // });
-    alert(msg)
+    Message.error(msg);
 }
 
 // /** 
