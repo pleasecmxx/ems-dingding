@@ -48,7 +48,7 @@ span {
 .content {
   width: 100%;
   height: 100%;
-  padding: 12px;
+  /* padding: 12px; */
   box-sizing: border-box;
 }
 
@@ -98,4 +98,10 @@ span {
 
 .upload-demo-button {
   height: 40px;
+}
+
+.operating_add_span {
+  color: #fff;
+  margin-left: 2px;
+  font-size: 12px;
 }

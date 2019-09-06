@@ -7,7 +7,8 @@ import {
     Login,
     RootView,
     ProductList,
-    Categories
+    Categories,
+    Shop
 } from './../pages'
 
 
@@ -29,6 +30,11 @@ const router = new VueRouter({
                     path: '/Categories',
                     name: '商品分类管理',
                     component: Categories,
+                },
+                {
+                    path: '/Shop',
+                    name: '商品分类管理',
+                    component: Shop,
                 }
             ]
         }, {

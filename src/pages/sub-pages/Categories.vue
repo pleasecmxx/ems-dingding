@@ -168,6 +168,10 @@ export default {
 </script>
 
 <style scoped>
+.content {
+  padding: 12px;
+}
+
 .operating {
   display: flex;
   padding-bottom: 12px;

@@ -43,6 +43,15 @@
                 <router-link tag="div" to="/Categories">商品分类管理</router-link>
               </el-menu-item>
             </el-submenu>
+            <el-submenu index="3">
+              <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span>店铺管理</span>
+              </template>
+              <el-menu-item index="3-1">
+                <router-link tag="div" to="/Shop">店铺列表</router-link>
+              </el-menu-item>
+            </el-submenu>
           </el-menu>
         </el-col>
       </el-row>
